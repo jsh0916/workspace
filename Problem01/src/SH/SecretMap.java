@@ -1,5 +1,3 @@
-package SH;
-
 /*
  	네오는 평소 프로도가 비상금을 숨겨놓는 장소를 알려줄 비밀지도를 손에 넣었다. 그런데 이 비밀지도는 숫자로 암호화되어 있어 위치를 확인하기 위해서는 암호를 해독해야 한다. 다행히 지도 암호를 해독할 방법을 적어놓은 메모도 함께 발견했다.
 
@@ -22,14 +20,17 @@ package SH;
 	arr1	[9, 20, 28, 18, 11]
 	arr2	[30, 1, 21, 17, 28]
 	출력	["#####","# # #", "### #", "#  ##", "#####"]
-*/
+ */
+package SH;
+
 public class SecretMap {
+	/* Solve_1
 	public static void main(String[] args) {
-		/*
+		
 		int number1 = 5;
 		int arr1[] = {9, 20, 28, 18, 11};
 		int arr2[] = {30, 1, 21, 17, 28};
-		*/
+		
 		
 		int number2 = 6;
 		int arr1[] = {46, 33, 33, 22, 31, 50};
@@ -76,5 +77,62 @@ public class SecretMap {
 				System.out.print(",");				
 			}
 		}
+	}
+	 */
+	
+	/*
+	 * Solve_2
+	 * 
+	 * --> toBinaryString 은 앞에 0을 붙여서 반환하지 않는다.
+	 * 따라서 테스트 케이스를 (9, n, n, n, n) , (9, n, n, n, n) 으로 하면
+	 * 첫번째 배열이 "#__#"와 같이 4자리수의 문자열을 반환하는 문제가 있음.
+	 * --> arr[i].length() 의 길이가 n 보다 작을 경우 그 차이만큼 0을 추가하는 조건문이 필요.
+	 * 
+	 * */  
+	public static void main(String[] args) {
+        int[] arr1;
+        int[] arr2;
+        
+        arr1 = new int[]{9, 20, 28, 18, 11};
+        arr2 = new int[]{30, 1, 21, 17, 28};
+        printArr(decodeScretMap(5, arr1, arr2));
+        
+        arr1 = new int[]{46, 33, 33 ,22, 31, 50};
+        arr2 = new int[]{27 ,56, 19, 14, 14, 10};
+        printArr(decodeScretMap(6, arr1, arr2));
+    }
+	
+	/*
+	 * 입력받은 arr1, arr2의 각 int를 or 연산 처리
+	 * -> toBinaryString 를 이용해 변환 -> 출력형태에 맞게 문자열 replace
+	 * @param n
+	 * @param arr1
+	 * @param arr2
+	 * @return
+	 * */
+	static String[] decodeScretMap(int n, int[] arr1, int[] arr2) {
+		String[] retArr = new String[n];
+		
+		for (int i = 0; i < n ; i++) {
+			retArr[i] = Integer.toBinaryString(arr1[i] | arr2[i])
+					.replace("0", " ")
+					.replace("1", "#");
+		}
+		
+		return retArr;
+	}
+	
+	/*
+	 * 배열을 입력받아 println
+	 * @param arr
+	 * */
+	static void printArr(String[] arr) {
+		StringBuilder sb = new StringBuilder();
+		
+		for (String str : arr) {
+			sb.append(", \"" + str + " \"");
+		}
+		
+		System.out.println(sb.toString().replaceFirst(", ", ""));
 	}
 }
