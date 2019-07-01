@@ -11,6 +11,7 @@ public class QuickSort {
 	}
 	
 	// 배열을 나눔
+	/*
 	public static void partition (int[] a, int n) {
 		int pl = 0;			// 왼쪽 커서
 		int pr = n - 1;		// 오른쪽 커서
@@ -54,6 +55,35 @@ public class QuickSort {
 		
 		System.out.println();
 	}
+	*/
+	
+	public static void quickSort (int[] x, int left, int right) {
+		int pl = left;
+		int pr = right;
+		int pivot = x[(left + right) / 2];
+		
+		do {
+			while (x[pl] < pivot) {
+				pl++;
+			}
+			
+			while (x[pr] > pivot) {
+				pr--;
+			}
+			
+			if (pl <= pr) {
+				swap (x, pl++, pr--);				
+			}
+		} while (pl <= pr);
+		
+		if (left < pr) {
+			quickSort (x, left, pr);
+		}
+		
+		if (pl < right) {
+			quickSort (x, pl, right);			
+		}
+	}
 	
 	public static void main (String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -68,6 +98,13 @@ public class QuickSort {
 			x[i] = scan.nextInt();
 		}
 
-		partition(x, count);
+		// partition(x, count);			--> pivot 을 기준으로 하위/상위 배열을 만듦. 
+		quickSort(x, 0, count - 1);
+		
+		
+		System.out.println("오름차순으로 정렬하였습니다.");
+		for (int i = 0; i < count; i++) {
+			System.out.println("x[" + i + "] = " + x[i]);
+		}
 	}
 }
