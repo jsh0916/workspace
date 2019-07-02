@@ -62,6 +62,12 @@ public class QuickSort {
 		int pr = right;
 		int pivot = x[(left + right) / 2];
 		
+		System.out.printf("a[%d] ~ a[%d] : {", left, right);
+		for (int i = left; i < right; i++) {
+			System.out.printf("%d , ", x[i]);
+		}
+		System.out.printf("%d}\n", x[right]);
+		
 		do {
 			while (x[pl] < pivot) {
 				pl++;
@@ -100,7 +106,6 @@ public class QuickSort {
 
 		// partition(x, count);			--> pivot 을 기준으로 하위/상위 배열을 만듦. 
 		quickSort(x, 0, count - 1);
-		
 		
 		System.out.println("오름차순으로 정렬하였습니다.");
 		for (int i = 0; i < count; i++) {
