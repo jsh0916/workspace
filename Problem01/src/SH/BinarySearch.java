@@ -1,10 +1,13 @@
 package SH;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 // 이진 검색
 public class BinarySearch {
 	//요솟수가 n인 배열 a에서 key와 같은 요소를 이진 검색
+	/*
 	static int binSearch (int[] a, int num, int key) {
 		int pl = 0;				// 검색 범위의 첫 인덱스
 		int pr = num - 1;			// 검색 범위의 끝 인덱스
@@ -22,6 +25,31 @@ public class BinarySearch {
 		} while (pl <= pr);
 		
 		return -1;
+	}
+	*/
+	
+	static int binSearchX (int[] a, int num, int key) {
+		int pl = 0; // 검색범위 맨 앞의 index
+		int pr = num - 1; // 검색범위 맨 뒤의 index
+
+		do {
+			int pc = (pl + pr) / 2; // 중앙요소의 index
+			if (a[pc] == key) {
+				for (; pc > pl; pc--) { // key와 같은 맨 앞의 요소를 찾습니다
+					if (a[pc - 1] < key) {
+						break;
+					}
+				}
+				return pc; // 검색성공
+			} else if (a[pc] < key)
+				pl = pc + 1; // 검색범위를 앞쪽 절반으로 좁힘
+			else {
+				pr = pc - 1; // 검색범위를 뒤쪽 절반으로 좁힘
+			}
+				
+		} while (pl <= pr);
+
+		return -1; // 검색실패
 	}
 	
 	public static void main(String[] args) {
@@ -46,7 +74,7 @@ public class BinarySearch {
 		System.out.print("검색할 값 : ");
 		int key = scan.nextInt();
 		
-		int idx = binSearch(x, num, key);
+		int idx = binSearchX (x, num, key);
 		
 		if (idx == -1) {
 			System.out.println("그 값의 요소가 없습니다.");
