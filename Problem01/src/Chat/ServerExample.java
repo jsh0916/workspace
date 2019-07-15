@@ -23,10 +23,10 @@ public class ServerExample {
 				Socket socket = serverSocket.accept(); // 클라이언트 연결 수락
 				InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress(); // 연결된 클라이언트의 IP와 포트정보를 알려줌.
 				System.out.println("[연결 수락함] " + isa.getHostName());
-			
+
 				byte[] bytes = null;
 				String message = null;
-				
+
 				// 2. 서버가 클라이언트에서 보낸 "hello server" 메세지를 받음
 				InputStream is = socket.getInputStream();
 				bytes = new byte[100];
