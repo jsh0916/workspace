@@ -57,6 +57,8 @@ public class QuickSort {
 	}
 	*/
 	
+	// Recursive
+	/*
 	public static void quickSort (int[] x, int left, int right) {
 		int pl = left;
 		int pr = right;
@@ -88,6 +90,83 @@ public class QuickSort {
 		
 		if (pl < right) {
 			quickSort (x, pl, right);			
+		}
+	}
+	*/
+	
+	// Non-Recursive
+	public static void quickSort(int[] x, int left, int right) {
+		IntStack lstack = new IntStack(right - left + 1);
+		IntStack rstack = new IntStack(right - left + 1);
+	
+		lstack.push(left);
+		rstack.push(right);
+		
+		System.out.printf("a[%d]~a[%d]를 분할하는 문제를 스택에 푸시합니다.\n", left, right);
+		System.out.print("Lstack:");
+		lstack.dump();
+		System.out.print("Rstack:");
+		rstack.dump();
+		
+		while (lstack.isEmpty() != true) {
+			int pl = left = lstack.pop();
+			int pr = right = rstack.pop();
+			int pivot = x[(left + right)/2];
+			
+			System.out.printf("스택에서 분할하는 문제를 꺼냈습니다.a[%d]~a[%d]를 분할합니다.\n", left, right);
+
+			do {
+				while (x[pl] < pivot) {
+					pl++;
+				}
+				
+				while (x[pr] > pivot) {
+					pr--;
+				}
+				
+				if (pl <= pr) {
+					swap(x, pl++, pr--);					
+				}
+			} while (pl <= pr);
+
+			/*
+			 * 요소의 개수가 적은 배열일수록 적은 횟수로 분할을 종료할 수 있다.
+			 * 따라서 요소의 개수가 많은 그룹을 먼저나누기보단 요소의 개수가 적은 그룹을 먼저 나누면
+			 * 스택에 쌓여 있는 데이터의 최대 개수를 줄일 수 있다.
+			 * */
+			if (pr - left < right - pl) {
+				int temp;
+
+				temp = left;
+				left = pl;
+				pl = temp;
+
+				temp = right;
+				right = pr;
+				pr = temp;
+			}
+
+			if (left < pr) {
+				lstack.push(left);
+				rstack.push(pr);
+				
+				System.out.printf("a[%d]~a[%d]를 분할하는 문제를 스택에 푸시합니다.\n", left, pr);
+				System.out.print("Lstack:");
+				lstack.dump();
+				System.out.print("Rstack:");
+				rstack.dump();
+			}
+			
+			if (pl < right) {
+				lstack.push(pl);
+				rstack.push(right);
+				
+				System.out.printf("a[%d]~a[%d]를 분할하는 문제를 스택에 푸시합니다.\n", pl, right);
+				System.out.print("Lstack:");
+				lstack.dump();
+				System.out.print("Rstack:");
+				rstack.dump();
+			}
 		}
 	}
 	
