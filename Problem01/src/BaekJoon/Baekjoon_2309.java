@@ -37,7 +37,7 @@ public class Baekjoon_2309 {
                 }
             }
             
-            if (sum == 100) {
+            if (newArr[i] == 0) {
                 break;
             }
         }
