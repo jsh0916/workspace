@@ -5,6 +5,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
+/*
+ * N-6개에 0을 넣고 k개의 1을 넣은 후 순열을 돌려
+ * 1이 있는 곳과 대응되는 자리의 수를 출력.
+ * 
+ * https://www.acmicpc.net/problem/6603
+ * */
 public class Baekjoon_6603 {
 	public static boolean next_permutation(int[] d) {
 		int i = d.length - 1;
@@ -72,6 +78,18 @@ public class Baekjoon_6603 {
 					}
 				}
 				
+				System.out.println();
+				System.out.println("d[i] : ");
+				for (int i = 0; i < n; i++) {
+					System.out.print(d[i] + " ");
+				}
+				
+				System.out.println();
+				System.out.println("a[i] : ");
+				for (int i = 0; i < n; i++) {
+					System.out.print(a[i] + " ");
+				}
+
 				ans.add(cur);
 			} while (next_permutation(d));
 			
