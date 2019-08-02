@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 // https://www.acmicpc.net/problem/9095
 public class Baekjoon_9095 {
-	public static void main(String[] args) {
+	/*
 		Scanner scan = new Scanner(System.in);
 		
 		int num = scan.nextInt();
@@ -68,4 +68,37 @@ public class Baekjoon_9095 {
 			System.out.println(count);
 		}
 	}
+	*/
+	
+	static int go (int sum, int goal) {
+        int count = 0;
+        if (sum > goal) {
+            return 0;
+        } 
+
+        if (sum == goal) {
+            return count;
+        } 
+        
+        int now = 0;
+        for (int i = 1; i <= 3; i++) {
+        	now += go(sum + i, goal);
+        }
+        
+        return now;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        int num = scan.nextInt();
+        int[] arr = new int[num];
+        
+        for (int i = 0; i < num; i++) {
+            arr[i] = scan.nextInt();
+            int n = go(0, num);
+            
+            System.out.println(n);
+        }
+    }
 }
