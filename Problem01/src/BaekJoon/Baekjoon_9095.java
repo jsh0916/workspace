@@ -71,13 +71,12 @@ public class Baekjoon_9095 {
 	*/
 	
 	static int go (int sum, int goal) {
-        int count = 0;
         if (sum > goal) {
             return 0;
         } 
 
         if (sum == goal) {
-            return count;
+            return 1;
         } 
         
         int now = 0;
