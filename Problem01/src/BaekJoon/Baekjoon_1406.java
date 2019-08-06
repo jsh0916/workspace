@@ -3,6 +3,7 @@ package BaekJoon;
 import java.util.Scanner;
 import java.util.Stack;
 
+//https://www.acmicpc.net/problem/1406
 public class Baekjoon_1406 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
