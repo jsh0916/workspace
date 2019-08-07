@@ -70,6 +70,7 @@ public class Baekjoon_9095 {
 	}
 	*/
 	
+	/* recursion
 	static int go (int sum, int goal) {
         if (sum > goal) {
             return 0;
@@ -98,6 +99,29 @@ public class Baekjoon_9095 {
             int n = go(0, num);
             
             System.out.println(n);
+        }
+    }
+    */
+	
+	// Bottom-Up
+	public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        
+        int num = scan.nextInt();
+        int[] arr = new int[11];
+        arr[0] = 1;
+        
+        for (int i = 1; i < num; i++) {
+            for (int j = 1; j <= 3; j++) {
+            	if (i - j >= 0) {
+            		arr[i] += arr[i - j];
+            	}
+            }
+        }
+        
+        while (num-- > 0) {
+        	int n = scan.nextInt();
+        	System.out.println(arr[n]);
         }
     }
 }

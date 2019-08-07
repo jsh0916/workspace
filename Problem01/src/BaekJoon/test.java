@@ -1,68 +1,30 @@
 package BaekJoon;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class test {
-	static boolean next_permutation(int[] d) {
-        int i = d.length - 1;
-        while (i > 0 && d[i - 1] >= d[i]) {
-            i--;
-        }
-        
-        if (i <= 0) {
-            return false;
-        }
-        
-        int j = d.length - 1;
-        while (d[i - 1] >= d[j]) {
-            j--;
-        }
-        
-        int temp = d[i - 1];
-        d[i - 1] = d[j];
-        d[j] = temp;
-        
-        j = d.length - 1;
-        while (i < j) {
-            temp = d[i];
-            d[i] = d[j];
-            d[j] = temp;
-            
-            i++;
-            j--;
-        }
-        
-        return true;
-    }
     
 	public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         
         int num = scan.nextInt();
-        int[] arr = new int[num];
+        int[] arr = new int[11];
         
-        for (int i = 0; i < num; i++) {
-            arr[i] = scan.nextInt();
+        arr[0] = 1;
+        
+        for (int i = 1; i <= 10; i++) {
+        	for (int j = 1; j <= 3; j++) {
+        		if (i - j >= 0) {
+        			arr[i] += arr[i - j];
+        		}
+        	}
         }
         
-        int[] d = new int[num];
+        int t = scan.nextInt();
         
-        for (int i = 0; i < num; i++) {
-            d[i] = i;
+        while (t-- > 0) {
+        	int n = scan.nextInt();
+        	System.out.println(arr[n]);
         }
-        
-        int max = 0;
-        
-        do {
-            int sum = 0;
-            for (int i = 0; i < num - 1; i++) {
-                sum += Math.abs(arr[d[i]] - arr[d[i + 1]]);
-            }
-            
-            max = Math.max(max, sum);
-        } while (next_permutation(d));
-        
-        System.out.println(max);
     }
 }
